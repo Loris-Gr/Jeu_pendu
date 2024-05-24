@@ -1,6 +1,6 @@
 {
     "java.project.sourcePaths": [
-        "src","graphics",".","bin"
+        "src",".","bin"
     ],
     "java.project.referencedLibraries": [
         "/usr/share/openjfx/lib/javafx.web.jar",
