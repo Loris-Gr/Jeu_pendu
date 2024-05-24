@@ -44,5 +44,11 @@ public class Clavier extends TilePane{
      */
     public void desactiveTouches(Set<String> touchesDesactivees){
         // A implémenter
+        for (Button bouton : this.clavier) {
+            if (touchesDesactivees.contains(bouton.getText())) {
+                bouton.setOpacity(0.33);
+                bouton.setDisable(true);
+            }
+        }
     }
 }
