@@ -10,13 +10,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.scene.control.Tooltip;
-import javafx.scene.control.TitledPane;
-import javafx.scene.layout.Region;
 import javafx.scene.text.TextAlignment;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar.ButtonData ;
-import javafx.scene.control.ButtonType ;
+
 import java.util.List;
 import java.util.Arrays;
 import java.io.File;
@@ -81,6 +77,8 @@ public class Pendu extends Application {
      * le bouton qui permet de (lancer ou relancer une partie
      */ 
     private Button bJouer;
+
+    private Button boutonInfo;
 
     /**
      * initialise les attributs (créer le modèle, charge les images, crée le chrono ...)
@@ -152,8 +150,9 @@ public class Pendu extends Application {
         }
     }
 
-    public void modeAccueil(){
-        // A implementer
+    public void modeAccueil(Scene scene){
+        Pane root = new FenetreAccueil(boutonMaison, boutonParametres, boutonInfo, bJouer, niveaux);
+        scene.setRoot(root);
     }
     
     public void modeJeu(){
@@ -216,8 +215,9 @@ public class Pendu extends Application {
     @Override
     public void start(Stage stage) {
         stage.setTitle("IUTEAM'S - La plateforme de jeux de l'IUTO");
-        stage.setScene(this.laScene());
-        this.modeAccueil();
+        Scene scene = this.laScene();
+        stage.setScene(scene);
+        this.modeAccueil(scene);
         stage.show();
     }
 
