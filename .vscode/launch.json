@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Pendu",
+            "request": "launch",
+            "mainClass": "Pendu",
+            "projectName": "Jeu_pendu_ef3aeb6"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "vmArgs": "--module-path /usr/share/openjfx/lib/ --add-modules javafx.controls,javafx.fxml",
