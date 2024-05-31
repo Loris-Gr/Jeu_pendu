@@ -8,6 +8,13 @@
             "type": "java",
             "name": "Pendu",
             "request": "launch",
+            "mainClass": "Pendu",
+            "projectName": "Jeu_pendu_b7e710df"
+        },
+        {
+            "type": "java",
+            "name": "Pendu",
+            "request": "launch",
             "vmArgs": "--module-path /usr/share/openjfx/lib/ --add-modules javafx.controls,javafx.fxml",
             "mainClass": "Pendu",
             "projectName": "Jeu_pendu_ef3aeb6"
@@ -18,6 +25,6 @@
             "request": "launch",
             "vmArgs": "--module-path /usr/share/openjfx/lib/ --add-modules javafx.controls,javafx.fxml",
             "mainClass": "${file}"
-        },
+        }
     ]
 }
