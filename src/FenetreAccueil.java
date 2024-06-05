@@ -1,10 +1,13 @@
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -35,7 +38,10 @@ public class FenetreAccueil extends BorderPane{
    
     private BorderPane Top() {
         BorderPane bpTop = new BorderPane();
-        bpTop.setLeft(new Label("Jeu du pendu"));
+        bpTop.setPadding(new Insets(20));
+        Label titre = new Label("Jeu du pendu");
+        titre.setFont(Font.font("Arial", FontWeight.BOLD, 25));
+        bpTop.setLeft(titre);
         this.hBox.getChildren().add(this.boutonAccueil);
         this.hBox.getChildren().add(this.boutonParam);
         this.hBox.getChildren().add(this.boutonInfo);
@@ -46,6 +52,7 @@ public class FenetreAccueil extends BorderPane{
 
     private VBox vBoxCenter() {
         VBox vBoxCenterr = new VBox();
+        vBoxCenterr.setSpacing(30);
         vBoxCenterr.getChildren().add(this.boutonPartie);
         TitledPane titledPane = new TitledPane("Niveau de difficulté", null);
         VBox vBox = new VBox();

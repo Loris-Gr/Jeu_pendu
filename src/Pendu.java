@@ -110,7 +110,7 @@ public class Pendu extends Application {
         imageInfosConteneur.setFitWidth(25);
         this.boutonInfo.setGraphic(imageInfosConteneur);
 
-        this.bJouer = new Button();
+        this.bJouer = new Button("Lancer une partie");
         this.niveaux = new ArrayList<>();
         this.niveaux.add("Débutant");
         this.niveaux.add("Medium");
