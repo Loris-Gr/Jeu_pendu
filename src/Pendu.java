@@ -88,6 +88,14 @@ public class Pendu extends Application {
         this.modelePendu = new MotMystere("/usr/share/dict/french", 3, 10, MotMystere.FACILE, 10);
         this.lesImages = new ArrayList<Image>();
         this.chargerImages("./img");
+        this.boutonMaison = new Button();
+        this.boutonParametres= new Button();
+        this.boutonInfo = new Button();
+        this.bJouer = new Button();
+        this.niveaux = new ArrayList<>();
+        this.niveaux.add("Débutant");
+        this.niveaux.add("Medium");
+        this.niveaux.add("Expert");
         // A terminer d'implementer
     }
 
@@ -145,7 +153,7 @@ public class Pendu extends Application {
     private void chargerImages(String repertoire){
         for (int i=0; i<this.modelePendu.getNbErreursMax()+1; i++){
             File file = new File(repertoire+"/pendu"+i+".png");
-            System.out.println(file.toURI().toString());
+            //System.out.println(file.toURI().toString());
             this.lesImages.add(new Image(file.toURI().toString()));
         }
     }

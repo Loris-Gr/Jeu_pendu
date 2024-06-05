@@ -16,6 +16,7 @@ public class FenetreAccueil extends BorderPane{
     private Button boutonParam;
     private Button boutonInfo;
     private Button boutonPartie;
+    private HBox hBox;
     private List<String> lesNiveaux;
 
     public FenetreAccueil(Button boutonAccueil, Button boutonParam, Button boutonInfo, Button boutonPartie, List<String> lesNiveaux) {
@@ -25,21 +26,22 @@ public class FenetreAccueil extends BorderPane{
         this.boutonInfo = boutonInfo;
         this.boutonPartie = boutonPartie;
         this.lesNiveaux = lesNiveaux;
+        this.hBox = new HBox();
 
-        this.setTop(hBoxTop());
+        this.setTop(Top());
         this.setCenter(vBoxCenter());
     }
 
-    private HBox hBoxTop() {
-        HBox hBoxTopp = new HBox();
-        hBoxTopp.getChildren().add(new Label("Jeu du pendu"));
-        HBox hBox = new HBox();
-        hBox.getChildren().add(this.boutonAccueil);
-        hBox.getChildren().add(this.boutonParam);
-        hBox.getChildren().add(this.boutonInfo);
-        hBoxTopp.getChildren().add(hBox);
+   
+    private BorderPane Top() {
+        BorderPane bpTop = new BorderPane();
+        bpTop.setLeft(new Label("Jeu du pendu"));
+        this.hBox.getChildren().add(this.boutonAccueil);
+        this.hBox.getChildren().add(this.boutonParam);
+        this.hBox.getChildren().add(this.boutonInfo);
+        bpTop.setRight(this.hBox);
         
-        return hBoxTopp;
+        return bpTop;
     }
 
     private VBox vBoxCenter() {
