@@ -89,13 +89,38 @@ public class Pendu extends Application {
         this.lesImages = new ArrayList<Image>();
         this.chargerImages("./img");
         this.boutonMaison = new Button();
+        Image imageMaison = new Image("file:img/home.png");
+        ImageView imageMaisonConteneur = new ImageView(imageMaison);
+        imageMaisonConteneur.setFitHeight(25);
+        imageMaisonConteneur.setFitWidth(25);
+        this.boutonMaison.setGraphic(imageMaisonConteneur);
+
         this.boutonParametres= new Button();
+        Image imageParametres = new Image("file:img/info.png");
+        ImageView imageParametresConteneur = new ImageView(imageParametres);
+        imageParametresConteneur.setFitHeight(25);
+        imageParametresConteneur.setFitWidth(25);
+        this.boutonParametres.setGraphic(imageParametresConteneur);
+
+
         this.boutonInfo = new Button();
+        Image imageInfos = new Image("file:img/parametres.png");
+        ImageView imageInfosConteneur = new ImageView(imageInfos);
+        imageInfosConteneur.setFitHeight(25);
+        imageInfosConteneur.setFitWidth(25);
+        this.boutonInfo.setGraphic(imageInfosConteneur);
+
         this.bJouer = new Button();
         this.niveaux = new ArrayList<>();
         this.niveaux.add("Débutant");
         this.niveaux.add("Medium");
         this.niveaux.add("Expert");
+
+
+        
+        
+        Button boutonBack = new Button("Question précédente");
+        
         // A terminer d'implementer
     }
 
