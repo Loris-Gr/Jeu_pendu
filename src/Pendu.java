@@ -80,6 +80,8 @@ public class Pendu extends Application {
 
     private Button boutonInfo;
 
+    private Scene scene;
+
     /**
      * initialise les attributs (créer le modèle, charge les images, crée le chrono ...)
      */
@@ -113,6 +115,9 @@ public class Pendu extends Application {
         this.boutonInfo.setGraphic(imageInfosConteneur);
 
         this.bJouer = new Button("Lancer une partie");
+        ControleurLancerPartie controleurLancerPartie = new ControleurLancerPartie(this.modelePendu, this);
+        this.bJouer.setOnAction(controleurLancerPartie);
+
         this.niveaux = new ArrayList<>();
         this.niveaux.add("Facile");
         this.niveaux.add("Medium");
@@ -194,14 +199,13 @@ public class Pendu extends Application {
         }
     }
 
-    public void modeAccueil(Scene scene){
-        //Pane root = new FenetreAccueil(boutonMaison, boutonParametres, boutonInfo, bJouer, niveaux);
-        Pane root = new FenetreJeu(this.boutonMaison, this.boutonParametres, this.boutonInfo, this.leNiveau, this.modelePendu, this.pg, this.lesImages, this.clavier, this.chrono);
-        scene.setRoot(root);
+    public void modeAccueil(){
+        Pane root = new FenetreAccueil(boutonMaison, boutonParametres, boutonInfo, bJouer, niveaux);
+        this.scene.setRoot(root);
     }
     
     public void modeJeu(){
-        // A implementer
+        
     }
     
     public void modeParametres(){
@@ -210,7 +214,8 @@ public class Pendu extends Application {
 
     /** lance une partie */
     public void lancePartie(){
-        // A implementer
+        Pane root = new FenetreJeu(this.boutonMaison, this.boutonParametres, this.boutonInfo, this.leNiveau, this.modelePendu, this.pg, this.lesImages, this.clavier, this.chrono);
+        this.scene.setRoot(root);
     }
 
     /**
@@ -231,6 +236,12 @@ public class Pendu extends Application {
 
     public Alert popUpPartieEnCours(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"La partie est en cours!\n Etes-vous sûr de l'interrompre ?", ButtonType.YES, ButtonType.NO);
+        alert.setTitle("Attention");
+        return alert;
+    }
+
+    public Alert popUpNouvellePartie() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Voulez-vous lancez une partie en " + this.leNiveau + " ?", ButtonType.YES, ButtonType.NO);
         alert.setTitle("Attention");
         return alert;
     }
@@ -260,9 +271,9 @@ public class Pendu extends Application {
     @Override
     public void start(Stage stage) {
         stage.setTitle("IUTEAM'S - La plateforme de jeux de l'IUTO");
-        Scene scene = this.laScene();
+        this.scene = this.laScene();
         stage.setScene(scene);
-        this.modeAccueil(scene);
+        this.modeAccueil();
         stage.show();
     }
 

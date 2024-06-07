@@ -1,5 +1,6 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import java.util.Optional;
 
@@ -21,7 +22,7 @@ public class ControleurLancerPartie implements EventHandler<ActionEvent> {
      * @param p vue du jeu
      */
     public ControleurLancerPartie(MotMystere modelePendu, Pendu vuePendu) {
-        // A implémenter
+        this.vuePendu = vuePendu;
     }
 
     /**
@@ -30,15 +31,27 @@ public class ControleurLancerPartie implements EventHandler<ActionEvent> {
      */
     @Override
     public void handle(ActionEvent actionEvent) {
-        // A implémenter
-    
-        Optional<ButtonType> reponse = this.vuePendu.popUpPartieEnCours().showAndWait(); // on lance la fenêtre popup et on attends la réponse
-        // si la réponse est oui
-        if (reponse.isPresent() && reponse.get().equals(ButtonType.YES)){
-            System.out.println("Ok !");
+        Button boutonCliquer = (Button) actionEvent.getSource();
+        if (boutonCliquer.getText().contains("Lancer")) {
+            Optional<ButtonType> reponse = this.vuePendu.popUpNouvellePartie().showAndWait();
+            if (reponse.isPresent() && reponse.get().equals(ButtonType.YES)){
+                System.out.println("Ok !");
+                this.vuePendu.lancePartie();
+            }
+            else{
+                System.out.println("D'ac !");
         }
-        else{
-            System.out.println("D'ac !");
+    }
+        else {
+            Optional<ButtonType> reponse = this.vuePendu.popUpPartieEnCours().showAndWait(); // on lance la fenêtre popup et on attends la réponse
+            if (reponse.isPresent() && reponse.get().equals(ButtonType.YES)){
+                System.out.println("Ok !");
+                this.vuePendu.lancePartie();
+            }
+            else{
+                System.out.println("D'ac !");
+            }
+          // si la réponse est oui
         }
     }
 }
