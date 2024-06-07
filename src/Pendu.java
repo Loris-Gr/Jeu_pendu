@@ -56,7 +56,7 @@ public class Pendu extends Application {
     /**
      * le text qui indique le niveau de difficulté
      */
-    private Text leNiveau;
+    private String leNiveau;
     /**
      * le chronomètre qui sera géré par une clasee à implémenter
      */
@@ -89,6 +89,7 @@ public class Pendu extends Application {
         this.motCrypte = modelePendu.getMotCrypte();
         this.lesImages = new ArrayList<Image>();
         this.chargerImages("./img");
+
         this.boutonMaison = new Button();
         Image imageMaison = new Image("file:img/home.png");
         ImageView imageMaisonConteneur = new ImageView(imageMaison);
@@ -97,7 +98,7 @@ public class Pendu extends Application {
         this.boutonMaison.setGraphic(imageMaisonConteneur);
 
         this.boutonParametres= new Button();
-        Image imageParametres = new Image("file:img/info.png");
+        Image imageParametres = new Image("file:img/parametres.png");
         ImageView imageParametresConteneur = new ImageView(imageParametres);
         imageParametresConteneur.setFitHeight(25);
         imageParametresConteneur.setFitWidth(25);
@@ -105,7 +106,7 @@ public class Pendu extends Application {
 
 
         this.boutonInfo = new Button();
-        Image imageInfos = new Image("file:img/parametres.png");
+        Image imageInfos = new Image("file:img/info.png");
         ImageView imageInfosConteneur = new ImageView(imageInfos);
         imageInfosConteneur.setFitHeight(25);
         imageInfosConteneur.setFitWidth(25);
@@ -121,6 +122,10 @@ public class Pendu extends Application {
         this.pg = new ProgressBar(0);
 
         this.clavier = new Clavier("ABCDEFGHIJKLMNOPKRSTUVWXYZ-", null);
+
+        this.leNiveau = "Facile";
+
+        this.chrono = new Chronometre();
 
 
         
@@ -190,8 +195,8 @@ public class Pendu extends Application {
     }
 
     public void modeAccueil(Scene scene){
-        //Pane root = new FenetreAccueil(boutonMaison, boutonParametres, boutonInfo, bJouer, niveaux);
-        Pane root = new FenetreJeu(boutonMaison, boutonParametres, boutonInfo, modelePendu, pg, lesImages, clavier);
+        Pane root = new FenetreAccueil(boutonMaison, boutonParametres, boutonInfo, bJouer, niveaux);
+        //Pane root = new FenetreJeu(this.boutonMaison, this.boutonParametres, this.boutonInfo, this.leNiveau, this.modelePendu, this.pg, this.lesImages, this.clavier, this.chrono);
         scene.setRoot(root);
     }
     
