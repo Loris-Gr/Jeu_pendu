@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -16,21 +17,25 @@ public class FenetreJeu extends BorderPane{
     private Button boutonAccueil;
     private Button boutonParam;
     private Button boutonInfo;
+    private String leNiveau;
     private MotMystere leMot;
     private ProgressBar pg;
     private ArrayList<Image> lesImages;
     private Clavier leClavier;
+    private Chronometre chrono;
     private int nbEssai;
 
-    public FenetreJeu(Button boutonAccueil, Button boutonParam, Button boutonInfo, MotMystere leMot, ProgressBar pg, ArrayList<Image> lesImages, Clavier leClavier) {
+    public FenetreJeu(Button boutonAccueil, Button boutonParam, Button boutonInfo, String leNiveau, MotMystere leMot, ProgressBar pg, ArrayList<Image> lesImages, Clavier leClavier, Chronometre chrono) {
         super();
         this.boutonAccueil = boutonAccueil;
         this.boutonParam = boutonParam;
         this.boutonInfo = boutonInfo;
+        this.leNiveau = leNiveau;
         this.leMot = leMot;
         this.pg = pg;
         this.lesImages = lesImages;
         this.leClavier = leClavier;
+        this.chrono = chrono;
         this.nbEssai = 0;
 
         this.setTop(Top());
@@ -61,6 +66,19 @@ public class FenetreJeu extends BorderPane{
         vBox.getChildren().add(this.pg);
         vBox.getChildren().add(this.leClavier);
         return vBox;     
+    }
+
+    private VBox vBoxRight() {
+        VBox vBox = new VBox();
+        vBox.getChildren().add(new Label("Niveau" + this.leNiveau));
+        TitledPane titledPane = new TitledPane("Chronomètre", null);
+        titledPane.setContent(this.chrono);
+        vBox.getChildren().add(titledPane);
+        Button boutonNouveauMot = new Button("Nouveau mot");
+        //bouton à init
+        vBox.getChildren().add(boutonNouveauMot);
+        return vBox;
+        
     }
 
 
