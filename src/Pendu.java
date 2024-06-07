@@ -113,6 +113,8 @@ public class Pendu extends Application {
         imageInfosConteneur.setFitHeight(25);
         imageInfosConteneur.setFitWidth(25);
         this.boutonInfo.setGraphic(imageInfosConteneur);
+        ControleurInfos controleurInfos = new ControleurInfos(this);
+        this.boutonInfo.setOnAction(controleurInfos);
 
         this.bJouer = new Button("Lancer une partie");
         ControleurLancerPartie controleurLancerPartie = new ControleurLancerPartie(this.modelePendu, this);
@@ -247,8 +249,9 @@ public class Pendu extends Application {
     }
         
     public Alert popUpReglesDuJeu(){
-        // A implementer
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Voilà plein d'infos !");
+        alert.setTitle("INFORMATIONS");
+        alert.setHeaderText("Voilà les règles du jeu");
         return alert;
     }
     
