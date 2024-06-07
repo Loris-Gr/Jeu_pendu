@@ -44,7 +44,7 @@ public class Pendu extends Application {
     /**
      * le mot à trouver avec les lettres déjà trouvé
      */
-    private Text motCrypte;
+    private String motCrypte;
     /**
      * la barre de progression qui indique le nombre de tentatives
      */
@@ -86,6 +86,7 @@ public class Pendu extends Application {
     @Override
     public void init() {
         this.modelePendu = new MotMystere("/usr/share/dict/french", 3, 10, MotMystere.FACILE, 10);
+        this.motCrypte = modelePendu.getMotCrypte();
         this.lesImages = new ArrayList<Image>();
         this.chargerImages("./img");
         this.boutonMaison = new Button();
@@ -112,9 +113,14 @@ public class Pendu extends Application {
 
         this.bJouer = new Button("Lancer une partie");
         this.niveaux = new ArrayList<>();
-        this.niveaux.add("Débutant");
+        this.niveaux.add("Facile");
         this.niveaux.add("Medium");
+        this.niveaux.add("Difficile");
         this.niveaux.add("Expert");
+
+        this.pg = new ProgressBar(0);
+
+        this.clavier = new Clavier("ABCDEFGHIJKLMNOPKRSTUVWXYZ-", null);
 
 
         
@@ -184,7 +190,8 @@ public class Pendu extends Application {
     }
 
     public void modeAccueil(Scene scene){
-        Pane root = new FenetreAccueil(boutonMaison, boutonParametres, boutonInfo, bJouer, niveaux);
+        //Pane root = new FenetreAccueil(boutonMaison, boutonParametres, boutonInfo, bJouer, niveaux);
+        Pane root = new FenetreJeu(boutonMaison, boutonParametres, boutonInfo, modelePendu, pg, lesImages, clavier);
         scene.setRoot(root);
     }
     
