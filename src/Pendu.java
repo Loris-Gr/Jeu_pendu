@@ -98,6 +98,8 @@ public class Pendu extends Application {
         imageMaisonConteneur.setFitHeight(25);
         imageMaisonConteneur.setFitWidth(25);
         this.boutonMaison.setGraphic(imageMaisonConteneur);
+        RetourAccueil controleurAccueil = new RetourAccueil(this.modelePendu, this);
+        this.boutonMaison.setOnAction(controleurAccueil);
 
         this.boutonParametres= new Button();
         Image imageParametres = new Image("file:img/parametres.png");
@@ -216,7 +218,7 @@ public class Pendu extends Application {
 
     /** lance une partie */
     public void lancePartie(){
-        Pane root = new FenetreJeu(this.boutonMaison, this.boutonParametres, this.boutonInfo, this.leNiveau, this.modelePendu, this.pg, this.lesImages, this.clavier, this.chrono);
+        Pane root = new FenetreJeu(this.boutonMaison, this.boutonParametres, this.boutonInfo, this, this.leNiveau, this.modelePendu, this.pg, this.lesImages, this.clavier, this.chrono);
         this.scene.setRoot(root);
     }
 
@@ -256,15 +258,13 @@ public class Pendu extends Application {
     }
     
     public Alert popUpMessageGagne(){
-        // A implementer
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Vous avez gagné, bravo"); 
         alert.setTitle("INFORMATIONS");
         alert.setHeaderText("Bravo !");       
         return alert;
     }
     
-    public Alert popUpMessagePerdu(){
-        // A implementer    
+    public Alert popUpMessagePerdu(){    
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Vous avez perdu, dommage");
         alert.setTitle("INFORMATIONS");
         alert.setHeaderText("Dommage !");

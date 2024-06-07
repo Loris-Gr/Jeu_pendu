@@ -17,6 +17,7 @@ public class FenetreJeu extends BorderPane{
     private Button boutonAccueil;
     private Button boutonParam;
     private Button boutonInfo;
+    private Pendu lePendu;
     private String leNiveau;
     private MotMystere leMot;
     private ProgressBar pg;
@@ -25,11 +26,12 @@ public class FenetreJeu extends BorderPane{
     private Chronometre chrono;
     private int nbEssai;
 
-    public FenetreJeu(Button boutonAccueil, Button boutonParam, Button boutonInfo, String leNiveau, MotMystere leMot, ProgressBar pg, ArrayList<Image> lesImages, Clavier leClavier, Chronometre chrono) {
+    public FenetreJeu(Button boutonAccueil, Button boutonParam, Button boutonInfo, Pendu lePendu, String leNiveau, MotMystere leMot, ProgressBar pg, ArrayList<Image> lesImages, Clavier leClavier, Chronometre chrono) {
         super();
         this.boutonAccueil = boutonAccueil;
         this.boutonParam = boutonParam;
         this.boutonInfo = boutonInfo;
+        this.lePendu = lePendu;
         this.leNiveau = leNiveau;
         this.leMot = leMot;
         this.pg = pg;
@@ -82,7 +84,6 @@ public class FenetreJeu extends BorderPane{
         titledPane.setContent(this.chrono);
         vBox.getChildren().add(titledPane);*/
         Button boutonNouveauMot = new Button("Nouveau mot");
-        //bouton à init
         vBox.getChildren().add(boutonNouveauMot);
         return vBox;
         

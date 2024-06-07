@@ -1,5 +1,6 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import java.util.Optional;
 
@@ -21,7 +22,8 @@ public class RetourAccueil implements EventHandler<ActionEvent> {
      * @param vuePendu vue du jeu
      */
     public RetourAccueil(MotMystere modelePendu, Pendu vuePendu) {
-        // A implémenter
+        this.vuePendu = vuePendu;
+        this.modelePendu = modelePendu;
     }
 
 
@@ -31,6 +33,13 @@ public class RetourAccueil implements EventHandler<ActionEvent> {
      */
     @Override
     public void handle(ActionEvent actionEvent) {
-        // A implémenter
-    }
+            Optional<ButtonType> reponse = this.vuePendu.popUpPartieEnCours().showAndWait(); // on lance la fenêtre popup et on attends la réponse
+            if (reponse.isPresent() && reponse.get().equals(ButtonType.YES)){
+                System.out.println("Ok !");
+                this.vuePendu.modeAccueil();
+            }
+            else{
+                System.out.println("D'ac !");
+            }
+        }
 }
