@@ -40,6 +40,7 @@ public class FenetreJeu extends BorderPane{
 
         this.setTop(Top());
         this.setCenter(vBoxCenter());
+        this.setRight(vBoxRight());
         
     }
 
@@ -59,7 +60,10 @@ public class FenetreJeu extends BorderPane{
 
     private VBox vBoxCenter() {
         VBox vBox = new VBox();
-        vBox.getChildren().add(new Label(this.leMot.getMotCrypte()));
+        vBox.setSpacing(30);
+        Label motCrypte = new Label(this.leMot.getMotCrypte());
+        motCrypte.setFont(Font.font("Arial", FontWeight.NORMAL, 20));
+        vBox.getChildren().add(motCrypte);
         Image imagePendu = lesImages.get(this.nbEssai);
         ImageView imagePenduConteneur = new ImageView(imagePendu);
         vBox.getChildren().add(imagePenduConteneur);
@@ -70,10 +74,13 @@ public class FenetreJeu extends BorderPane{
 
     private VBox vBoxRight() {
         VBox vBox = new VBox();
-        vBox.getChildren().add(new Label("Niveau" + this.leNiveau));
-        TitledPane titledPane = new TitledPane("Chronomètre", null);
+        vBox.setSpacing(30);
+        Label labelNiveau = new Label("Niveau " + this.leNiveau);
+        labelNiveau.setFont(Font.font("Arial", FontWeight.NORMAL, 15));
+        vBox.getChildren().add((labelNiveau));
+        /*TitledPane titledPane = new TitledPane("Chronomètre", null);
         titledPane.setContent(this.chrono);
-        vBox.getChildren().add(titledPane);
+        vBox.getChildren().add(titledPane);*/
         Button boutonNouveauMot = new Button("Nouveau mot");
         //bouton à init
         vBox.getChildren().add(boutonNouveauMot);

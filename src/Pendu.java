@@ -195,8 +195,8 @@ public class Pendu extends Application {
     }
 
     public void modeAccueil(Scene scene){
-        Pane root = new FenetreAccueil(boutonMaison, boutonParametres, boutonInfo, bJouer, niveaux);
-        //Pane root = new FenetreJeu(this.boutonMaison, this.boutonParametres, this.boutonInfo, this.leNiveau, this.modelePendu, this.pg, this.lesImages, this.clavier, this.chrono);
+        //Pane root = new FenetreAccueil(boutonMaison, boutonParametres, boutonInfo, bJouer, niveaux);
+        Pane root = new FenetreJeu(this.boutonMaison, this.boutonParametres, this.boutonInfo, this.leNiveau, this.modelePendu, this.pg, this.lesImages, this.clavier, this.chrono);
         scene.setRoot(root);
     }
     
