@@ -257,13 +257,17 @@ public class Pendu extends Application {
     
     public Alert popUpMessageGagne(){
         // A implementer
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);        
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Vous avez gagné, bravo"); 
+        alert.setTitle("INFORMATIONS");
+        alert.setHeaderText("Bravo !");       
         return alert;
     }
     
     public Alert popUpMessagePerdu(){
         // A implementer    
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Vous avez perdu, dommage");
+        alert.setTitle("INFORMATIONS");
+        alert.setHeaderText("Dommage !");
         return alert;
     }
 
