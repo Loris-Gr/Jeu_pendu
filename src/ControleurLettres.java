@@ -38,7 +38,7 @@ public class ControleurLettres implements EventHandler<ActionEvent> {
         char lettre = lettreString.charAt(0);
         System.out.println(lettre);
         this.modelePendu.essaiLettre(lettre);
-        vuePendu.majAffichage();
+        this.vuePendu.majAffichage();
 
     }
 }

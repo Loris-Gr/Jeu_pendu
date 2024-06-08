@@ -19,26 +19,28 @@ public class FenetreJeu extends BorderPane{
     private Button boutonInfo;
     private Pendu lePendu;
     private String leNiveau;
-    private MotMystere leMot;
+    private MotMystere modelePendu;
     private ProgressBar pg;
     private ArrayList<Image> lesImages;
     private Clavier leClavier;
     private Chronometre chrono;
     private int nbEssai;
+    private String motCrypte;
 
-    public FenetreJeu(Button boutonAccueil, Button boutonParam, Button boutonInfo, Pendu lePendu, String leNiveau, MotMystere leMot, ProgressBar pg, ArrayList<Image> lesImages, Clavier leClavier, Chronometre chrono) {
+    public FenetreJeu(Button boutonAccueil, Button boutonParam, Button boutonInfo, Pendu lePendu, String leNiveau, MotMystere modelePendu, ProgressBar pg, ArrayList<Image> lesImages, Clavier leClavier, Chronometre chrono, int nbEssai, String motCrypte) {
         super();
         this.boutonAccueil = boutonAccueil;
         this.boutonParam = boutonParam;
         this.boutonInfo = boutonInfo;
         this.lePendu = lePendu;
         this.leNiveau = leNiveau;
-        this.leMot = leMot;
+        this.modelePendu = modelePendu;
         this.pg = pg;
         this.lesImages = lesImages;
         this.leClavier = leClavier;
         this.chrono = chrono;
-        this.nbEssai = 0;
+        this.nbEssai = nbEssai;
+        this.motCrypte = motCrypte;
 
         this.setTop(Top());
         this.setCenter(vBoxCenter());
@@ -60,10 +62,10 @@ public class FenetreJeu extends BorderPane{
         return bpTop;
     }
 
-    private VBox vBoxCenter() {
+    public VBox vBoxCenter() {
         VBox vBox = new VBox();
         vBox.setSpacing(30);
-        Label motCrypte = new Label(this.leMot.getMotCrypte());
+        Label motCrypte = new Label(this.modelePendu.getMotCrypte());
         motCrypte.setFont(Font.font("Arial", FontWeight.NORMAL, 20));
         vBox.getChildren().add(motCrypte);
         Image imagePendu = lesImages.get(this.nbEssai);
@@ -80,14 +82,11 @@ public class FenetreJeu extends BorderPane{
         Label labelNiveau = new Label("Niveau " + this.leNiveau);
         labelNiveau.setFont(Font.font("Arial", FontWeight.NORMAL, 15));
         vBox.getChildren().add((labelNiveau));
-        /*TitledPane titledPane = new TitledPane("Chronomètre", null);
+        TitledPane titledPane = new TitledPane("Chronomètre", null);
         titledPane.setContent(this.chrono);
-        vBox.getChildren().add(titledPane);*/
+        vBox.getChildren().add(titledPane);
         Button boutonNouveauMot = new Button("Nouveau mot");
         vBox.getChildren().add(boutonNouveauMot);
         return vBox;
-        
     }
-
-
 }

@@ -82,6 +82,8 @@ public class Pendu extends Application {
 
     private Scene scene;
 
+    private Stage stage;
+
     /**
      * initialise les attributs (créer le modèle, charge les images, crée le chrono ...)
      */
@@ -137,7 +139,7 @@ public class Pendu extends Application {
         this.chrono = new Chronometre();
 
 
-        
+
         
         Button boutonBack = new Button("Question précédente");
         
@@ -218,7 +220,12 @@ public class Pendu extends Application {
 
     /** lance une partie */
     public void lancePartie(){
-        Pane root = new FenetreJeu(this.boutonMaison, this.boutonParametres, this.boutonInfo, this, this.leNiveau, this.modelePendu, this.pg, this.lesImages, this.clavier, this.chrono);
+        this.modelePendu.setMotATrouver();
+        this.clavier.restart();
+        this.chrono.resetTime();
+        this.chrono.start();
+        this.pg = new ProgressBar(0);
+        Pane root = new FenetreJeu(this.boutonMaison, this.boutonParametres, this.boutonInfo, this, this.leNiveau, this.modelePendu, this.pg, this.lesImages, this.clavier, this.chrono, 0, this.motCrypte);
         this.scene.setRoot(root);
     }
 
@@ -227,13 +234,15 @@ public class Pendu extends Application {
      */
     public void majAffichage(){
         this.motCrypte = this.modelePendu.getMotCrypte();
-        int nbErreurs = this.modelePendu.getNbErreursRestants();
-        if (nbErreurs < this.lesImages.size()) {
-        this.dessin.setImage(this.lesImages.get(modelePendu.getNbErreursMax()-nbErreurs));
-        }
+        int nbErreursRestantes = this.modelePendu.getNbErreursRestants();
+        int nbErreurs = this.modelePendu.getNbErreursMax()-nbErreursRestantes;
         double progress = (double) nbErreurs / this.modelePendu.getNbErreursMax();
         this.pg.setProgress(progress);
         this.clavier.desactiveTouches(this.modelePendu.getLettresEssayees());
+        Pane root = new FenetreJeu(this.boutonInfo, this.boutonParametres, this.boutonInfo, this, this.leNiveau, this.modelePendu, this.pg, this.lesImages, this.clavier, this.chrono, nbErreurs, this.motCrypte);
+        this.scene.setRoot(root);
+        this.stage.show();
+        
         if (this.modelePendu.gagne()) {
             this.popUpMessageGagne().show();
             this.modeAccueil();
@@ -249,8 +258,7 @@ public class Pendu extends Application {
      * @return le chronomètre du jeu
      */
     public Chronometre getChrono(){
-        // A implémenter
-        return null; // A enlever
+        return this.chrono; 
     }
 
     public void changerNiveau(int niveau) {
@@ -302,17 +310,15 @@ public class Pendu extends Application {
         return alert;
     }
 
-    /**
-     * créer le graphe de scène et lance le jeu
-     * @param stage la fenêtre principale
-     */
+
     @Override
     public void start(Stage stage) {
-        stage.setTitle("IUTEAM'S - La plateforme de jeux de l'IUTO");
+        this.stage = stage;
+        this.stage.setTitle("IUTEAM'S - La plateforme de jeux de l'IUTO");
         this.scene = this.laScene();
-        stage.setScene(scene);
+        this.stage.setScene(scene);
         this.modeAccueil();
-        stage.show();
+        this.stage.show();
     }
 
     /**
