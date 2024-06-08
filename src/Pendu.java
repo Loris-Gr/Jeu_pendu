@@ -204,7 +204,7 @@ public class Pendu extends Application {
     }
 
     public void modeAccueil(){
-        Pane root = new FenetreAccueil(boutonMaison, boutonParametres, boutonInfo, bJouer, niveaux);
+        Pane root = new FenetreAccueil(this.boutonMaison, this.boutonParametres, this.boutonInfo, this.bJouer, this.modelePendu, this, this.niveaux);
         this.scene.setRoot(root);
     }
     
@@ -236,6 +236,22 @@ public class Pendu extends Application {
     public Chronometre getChrono(){
         // A implémenter
         return null; // A enlever
+    }
+
+    public void changerNiveau(int niveau) {
+        //fonction pour actualiser le this.leNiveau
+        if (niveau == 0) {
+            this.leNiveau = "Facile";
+        }
+        if (niveau == 1) {
+            this.leNiveau = "Medium";
+        }
+        if (niveau == 2) {
+            this.leNiveau = "Difficile";
+        }
+        if (niveau == 3) {
+            this.leNiveau = "Expert";
+        }
     }
 
     public Alert popUpPartieEnCours(){

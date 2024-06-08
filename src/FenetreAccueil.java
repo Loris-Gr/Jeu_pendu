@@ -19,16 +19,20 @@ public class FenetreAccueil extends BorderPane{
     private Button boutonParam;
     private Button boutonInfo;
     private Button boutonPartie;
+    private MotMystere modelePendu;
+    private Pendu lePendu;
     private HBox hBox;
     private List<String> lesNiveaux;
 
-    public FenetreAccueil(Button boutonAccueil, Button boutonParam, Button boutonInfo, Button boutonPartie, List<String> lesNiveaux) {
+    public FenetreAccueil(Button boutonAccueil, Button boutonParam, Button boutonInfo, Button boutonPartie, MotMystere modelePendu, Pendu lePendu, List<String> lesNiveaux) {
         super();
         this.boutonAccueil = boutonAccueil;
         this.boutonParam = boutonParam;
         this.boutonInfo = boutonInfo;
         this.boutonPartie = boutonPartie;
+        this.modelePendu = modelePendu;
         this.lesNiveaux = lesNiveaux;
+        this.lePendu = lePendu;
         this.hBox = new HBox();
 
         this.setTop(Top());
@@ -62,9 +66,12 @@ public class FenetreAccueil extends BorderPane{
         for (String niveau : this.lesNiveaux) {
             laListe.add(new RadioButton(niveau));
         }
+        int i = 0;
         for (RadioButton radiobouton : laListe) {
             radiobouton.setToggleGroup(toggleGroup);
+            radiobouton.setOnAction(new ControleurNiveau(this.modelePendu, i, this.lePendu));
             vBox.getChildren().add(radiobouton);
+            i++;
         }
         titledPane.setContent(vBox);
         vBoxCenterr.getChildren().add(titledPane);
