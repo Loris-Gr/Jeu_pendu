@@ -130,7 +130,7 @@ public class Pendu extends Application {
 
         this.pg = new ProgressBar(0);
 
-        this.clavier = new Clavier("ABCDEFGHIJKLMNOPKRSTUVWXYZ-", null);
+        this.clavier = new Clavier("ABCDEFGHIJKLMNOPKRSTUVWXYZ-", new ControleurLettres(modelePendu, this));
 
         this.leNiveau = "Facile";
 
@@ -226,7 +226,22 @@ public class Pendu extends Application {
      * raffraichit l'affichage selon les données du modèle
      */
     public void majAffichage(){
-        // A implementer
+        this.motCrypte = this.modelePendu.getMotCrypte();
+        int nbErreurs = this.modelePendu.getNbErreursRestants();
+        if (nbErreurs < this.lesImages.size()) {
+        this.dessin.setImage(this.lesImages.get(modelePendu.getNbErreursMax()-nbErreurs));
+        }
+        double progress = (double) nbErreurs / this.modelePendu.getNbErreursMax();
+        this.pg.setProgress(progress);
+        this.clavier.desactiveTouches(this.modelePendu.getLettresEssayees());
+        if (this.modelePendu.gagne()) {
+            this.popUpMessageGagne().show();
+            this.modeAccueil();
+        } 
+        else if (this.modelePendu.perdu()) {
+            this.popUpMessagePerdu().show();
+            this.modeAccueil();
+        }
     }
 
     /**
