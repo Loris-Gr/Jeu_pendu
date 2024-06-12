@@ -248,7 +248,6 @@ public class Pendu extends Application {
         this.pg.setProgress(progress);
         this.clavier.desactiveTouches(this.modelePendu.getLettresEssayees());
         this.laFenetreDeJeu.maj(this.modelePendu, this.pg, this.clavier, this.chrono, this.motCrypte, nbErreurs);
-        this.stage.show();
         
         if (this.modelePendu.gagne()) {
             this.popUpMessageGagne().show();
