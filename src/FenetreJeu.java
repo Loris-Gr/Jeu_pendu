@@ -27,7 +27,7 @@ public class FenetreJeu extends BorderPane{
     private int nbEssai;
     private String motCrypte;
 
-    public FenetreJeu(Button boutonAccueil, Button boutonParam, Button boutonInfo, Pendu lePendu, String leNiveau, MotMystere modelePendu, ProgressBar pg, ArrayList<Image> lesImages, Clavier leClavier, Chronometre chrono, int nbEssai, String motCrypte) {
+    public FenetreJeu(Button boutonAccueil, Button boutonParam, Button boutonInfo, Pendu lePendu, String leNiveau, MotMystere modelePendu, ProgressBar pg, ArrayList<Image> lesImages, Clavier leClavier, Chronometre chrono, String motCrypte) {
         super();
         this.boutonAccueil = boutonAccueil;
         this.boutonParam = boutonParam;
@@ -39,8 +39,8 @@ public class FenetreJeu extends BorderPane{
         this.lesImages = lesImages;
         this.leClavier = leClavier;
         this.chrono = chrono;
-        this.nbEssai = nbEssai;
         this.motCrypte = motCrypte;
+        this.nbEssai = 0;
 
         this.setTop(Top());
         this.setCenter(vBoxCenter());
@@ -88,5 +88,21 @@ public class FenetreJeu extends BorderPane{
         Button boutonNouveauMot = new Button("Nouveau mot");
         vBox.getChildren().add(boutonNouveauMot);
         return vBox;
+    }
+
+    public void reset(String leNiveau, MotMystere modelePendu, ProgressBar pg, Clavier clavier, Chronometre chrono, String motCrypte) {
+        this.leNiveau = leNiveau;
+        this.modelePendu = modelePendu;
+        this.pg = pg;
+        this.leClavier = clavier;
+        this.chrono = chrono;
+        this.motCrypte = motCrypte;
+
+        this.setCenter(vBoxCenter());
+        this.setRight(vBoxRight());
+    }
+
+    public void ajoutEssai() {
+        this.nbEssai+=1;
     }
 }
