@@ -84,6 +84,10 @@ public class Pendu extends Application {
 
     private Stage stage;
 
+    private FenetreAccueil laFenetreDAccueil;
+
+    private FenetreJeu laFenetreDeJeu;
+
     /**
      * initialise les attributs (créer le modèle, charge les images, crée le chrono ...)
      */
@@ -137,6 +141,10 @@ public class Pendu extends Application {
         this.leNiveau = "Facile";
 
         this.chrono = new Chronometre();
+
+        this.laFenetreDAccueil = new FenetreAccueil(this.boutonMaison, this.boutonParametres, this.boutonInfo, this.bJouer, this.modelePendu, this, this.niveaux);
+
+        this.laFenetreDeJeu = new FenetreJeu(this.boutonMaison, this.boutonParametres, this.boutonInfo, this, this.leNiveau, this.modelePendu, this.pg, this.lesImages, this.clavier, this.chrono, this.motCrypte);
 
 
 
@@ -206,8 +214,7 @@ public class Pendu extends Application {
     }
 
     public void modeAccueil(){
-        Pane root = new FenetreAccueil(this.boutonMaison, this.boutonParametres, this.boutonInfo, this.bJouer, this.modelePendu, this, this.niveaux);
-        this.scene.setRoot(root);
+        this.scene.setRoot(this.laFenetreDAccueil);
     }
     
     public void modeJeu(){
@@ -221,12 +228,13 @@ public class Pendu extends Application {
     /** lance une partie */
     public void lancePartie(){
         this.modelePendu.setMotATrouver();
+        this.motCrypte = this.modelePendu.getMotCrypte();
         this.clavier.restart();
         this.chrono.resetTime();
         this.chrono.start();
-        this.pg = new ProgressBar(0);
-        Pane root = new FenetreJeu(this.boutonMaison, this.boutonParametres, this.boutonInfo, this, this.leNiveau, this.modelePendu, this.pg, this.lesImages, this.clavier, this.chrono, 0, this.motCrypte);
-        this.scene.setRoot(root);
+        this.pg.setProgress(0);
+        this.laFenetreDeJeu.reset(this.leNiveau, this.modelePendu, this.pg, this.clavier, this.chrono, this.motCrypte);
+        this.scene.setRoot(this.laFenetreDeJeu);
     }
 
     /**
@@ -239,8 +247,7 @@ public class Pendu extends Application {
         double progress = (double) nbErreurs / this.modelePendu.getNbErreursMax();
         this.pg.setProgress(progress);
         this.clavier.desactiveTouches(this.modelePendu.getLettresEssayees());
-        Pane root = new FenetreJeu(this.boutonInfo, this.boutonParametres, this.boutonInfo, this, this.leNiveau, this.modelePendu, this.pg, this.lesImages, this.clavier, this.chrono, nbErreurs, this.motCrypte);
-        this.scene.setRoot(root);
+        this.laFenetreDeJeu.maj(this.modelePendu, this.pg, this.clavier, this.chrono, this.motCrypte, nbErreurs);
         this.stage.show();
         
         if (this.modelePendu.gagne()) {
@@ -297,14 +304,14 @@ public class Pendu extends Application {
     }
     
     public Alert popUpMessageGagne(){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Vous avez gagné, bravo"); 
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Vous avez gagné, bravo ! Le mot était bien " + this.modelePendu.getMotATrouve()); 
         alert.setTitle("INFORMATIONS");
         alert.setHeaderText("Bravo !");       
         return alert;
     }
     
     public Alert popUpMessagePerdu(){    
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Vous avez perdu, dommage");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Vous avez perdu, dommage. Le mot était " + this.modelePendu.getMotATrouve());
         alert.setTitle("INFORMATIONS");
         alert.setHeaderText("Dommage !");
         return alert;

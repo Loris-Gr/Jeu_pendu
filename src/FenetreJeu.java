@@ -102,6 +102,17 @@ public class FenetreJeu extends BorderPane{
         this.setRight(vBoxRight());
     }
 
+    public void maj(MotMystere modelePendu, ProgressBar pg, Clavier clavier, Chronometre chrono, String motCrypte, int nbErreurs) {
+        this.modelePendu = modelePendu;
+        this.pg = pg;
+        this.leClavier = clavier;
+        this.chrono = chrono;
+        this.motCrypte = motCrypte;
+        this.nbEssai = nbErreurs;
+
+        this.setCenter(vBoxCenter());
+    }
+
     public void ajoutEssai() {
         this.nbEssai+=1;
     }
