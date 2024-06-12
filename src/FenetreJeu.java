@@ -86,6 +86,7 @@ public class FenetreJeu extends BorderPane{
         titledPane.setContent(this.chrono);
         vBox.getChildren().add(titledPane);
         Button boutonNouveauMot = new Button("Nouveau mot");
+        boutonNouveauMot.setOnAction(new ControleurLancerPartie(this.modelePendu, this.lePendu));
         vBox.getChildren().add(boutonNouveauMot);
         return vBox;
     }
@@ -97,7 +98,7 @@ public class FenetreJeu extends BorderPane{
         this.leClavier = clavier;
         this.chrono = chrono;
         this.motCrypte = motCrypte;
-
+        this.nbEssai = 0;
         this.setCenter(vBoxCenter());
         this.setRight(vBoxRight());
     }
